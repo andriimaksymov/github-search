@@ -1,0 +1,46 @@
+:root {
+  --color-primary-light: hsl(280, 80%, 40%);
+  --color-primary-main: hsl(280, 80%, 30%);
+  --color-primary-dark: hsl(280, 80%, 25%);
+}
+
+html, body {
+  height: 100%;
+}
+
+body {
+  line-height: 1.5;
+  font-size: 16px;
+  font-family: Roboto, Arial, sans-serif;
+}
+
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  line-height: 1.2;
+  font-weight: 700;
+}
+
+h1 {
+  font-size: 2rem;
+}
+
+main {
+  padding: 20px;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+
+  &:hover, &:focus {
+    text-decoration: none;
+    color: var(--color-primary-main);
+  }
+}
+
+.text-center {
+  text-align: center;
+}
