@@ -1,14 +1,13 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
 import styles from './Search.module.scss';
 
 interface Props {
-  value?: string
+  placeholder?: string,
+  onSearch: (value: string) => void,
 }
 
-const Search: React.FC<Props> = ({ value = '' }) => {
-  const [query, setQuery] = useState<string>(value);
-  const history = useNavigate();
+const Search: React.FC<Props> = ({ onSearch, placeholder = 'Write username...' }) => {
+  const [query, setQuery] = useState<string>('');
 
   const handleSetQuery = (e: React.FormEvent<HTMLInputElement>) => {
     setQuery(e.currentTarget.value);
@@ -16,7 +15,7 @@ const Search: React.FC<Props> = ({ value = '' }) => {
 
   const handleSubmit = (e: React.SyntheticEvent<HTMLFormElement>) => {
     e.preventDefault();
-    if (query) history(`/?query=${query}`)
+    onSearch(query);
   }
 
   return (
@@ -26,7 +25,7 @@ const Search: React.FC<Props> = ({ value = '' }) => {
           type="text"
           className={styles.input}
           value={query}
-          placeholder="Write username..."
+          placeholder={placeholder}
           onChange={handleSetQuery}
         />
         <button className={styles.button}>
@@ -37,4 +36,4 @@ const Search: React.FC<Props> = ({ value = '' }) => {
   )
 };
 
-export default Search
+export default Search;

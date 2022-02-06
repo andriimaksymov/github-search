@@ -1,0 +1,25 @@
+.wrapper {
+  display: grid;
+  grid-template-columns: 216px 1fr;
+  grid-gap: 30px;
+  margin-bottom: 30px;
+}
+
+.userInfo {
+  display: grid;
+  grid-gap: 10px;
+}
+
+.infoLabel {
+  font-size: .9em;
+  margin-right: 10px;
+  color: var(--color-muted)
+}
+
+.showMore {
+  display: inline-block;
+  cursor: pointer;
+  color: var(--color-muted);
+  font-size: .8em;
+  margin-left: 10px;
+}
