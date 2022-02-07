@@ -2,6 +2,8 @@ import React, { memo, useState } from 'react';
 import styles from './ProfileInfo.module.scss';
 import { IProfileData } from '../../types';
 
+const BIO_LENGTH = 100;
+
 const ProfileInfo: React.FC<Partial<IProfileData>> = (
   {
     avatar_url,
@@ -39,9 +41,9 @@ const ProfileInfo: React.FC<Partial<IProfileData>> = (
         </div>
       </div>
       {bio && <p>
-        {showFullBio ? bio.slice(0, 100) + '...' : bio}
+        {showFullBio && bio.length > BIO_LENGTH ? bio.slice(0, BIO_LENGTH) + '...' : bio}
         {
-          bio.length > 100 &&
+          bio.length > BIO_LENGTH &&
           <span onClick={handleToggleBio} className={styles.showMore}>{showFullBio ? 'show more' : 'show less'}</span>
         }
       </p>}

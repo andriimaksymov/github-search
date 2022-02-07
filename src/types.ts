@@ -1,12 +1,17 @@
 export interface IUsers {
-  items?: object[]
+  items?: object[],
 }
 
 export interface IUserData {
-  login: string,
-  avatar_url: string,
-  name: string
-  repos_url: string,
+  login?: string,
+  avatar_url?: string,
+  name?: string
+}
+
+export interface IRepoData {
+  full_name: string,
+  forks: number,
+  stargazers_count: number,
 }
 
 export interface IProfileData {

@@ -1,14 +1,16 @@
 import * as React from 'react'
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import { IProfileData } from '../types';
+import { IProfileData, IRepoData } from '../types';
 import ProfileInfo from '../components/ProfileInfo/ProfileInfo';
+import RepoItem from '../components/RepoItem/RepoItem';
 import Search from '../components/Search/Search';
 
 const Profile: React.FC = () => {
   const { login } = useParams();
   const [data, setData] = useState<Partial<IProfileData>>({});
   const [repos, setRepos] = useState([]);
+  const [filteredRepos, setFilteredRepos] = useState([]);
 
   useEffect(() => {
     fetch(`https://api.github.com/users/${login}`)
@@ -19,18 +21,29 @@ const Profile: React.FC = () => {
           .then(res => res.json())
           .then(data => {
             setRepos(data);
+            setFilteredRepos(data);
           })
       })
   }, [login]);
 
   const handleGetUserRepo = (query: string) => {
-    console.log(query)
+    setFilteredRepos(repos.filter((i: any) => i.full_name.includes(query)));
   }
 
   return (
     <main>
       <ProfileInfo {...data} />
       <Search placeholder="Repository..." onSearch={handleGetUserRepo} />
+      {
+        filteredRepos.map((i: IRepoData) => (
+          <RepoItem
+            key={i.full_name}
+            forks={i.forks}
+            full_name={i.full_name}
+            stargazers_count={i.stargazers_count}
+          />
+        ))
+      }
     </main>
   )
 }
